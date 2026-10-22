@@ -1,0 +1,11 @@
+# images -> binary codes of the frozen pretrained autoencoder
+train:
+  img:
+    _target_: src.transforms.binary_encode.BinaryEncode
+    deterministic: false
+    autoencoder: ${autoencoder}
+inference:
+  img:
+    _target_: src.transforms.binary_encode.BinaryEncode
+    deterministic: false
+    autoencoder: ${autoencoder}

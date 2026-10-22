@@ -1,0 +1,21 @@
+hydra:
+  run:
+    dir: data/saved/${inferencer.save_path}
+
+defaults:
+  - _self_
+  - dataset: ???
+  - dataloader: default
+  - autoencoder: c64
+  - evaluation: default
+  - transforms: diffusion
+  - model: diffusion
+  - metrics: diffusion
+
+inferencer:
+  device_tensors: ["img"] # add "label" for conditional models
+  device: "auto"  # device name or "auto"
+  seed: 42
+  from_pretrained: null  # path to the model checkpoint (*.pth file)
+  use_ema: false  # load EMA (shadow) weights from checkpoint instead of raw weights
+  save_path: "default"  # predictions saved to data/saved/{save_path}/{partition}/

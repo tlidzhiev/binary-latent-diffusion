@@ -1,0 +1,4 @@
+defaults:
+  - batch_transforms: diffusion
+  - instance_transforms: default
+  - _self_

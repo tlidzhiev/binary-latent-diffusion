@@ -1,0 +1,17 @@
+_target_: src.model.diffusion.diffusion.BinaryDiffusion
+num_timesteps: 64
+schedule: linear # linear, cos, sigmoid
+p_flip: true # the denoiser predicts bit flips of x_t instead of x_0
+cond_dropout: 0.0 # 0.1 to enable classifier-free guidance for conditional models
+denoiser:
+  _target_: src.model.diffusion.transformer.DenoisingTransformer
+  codebook_size: ${autoencoder.codebook_size} # number of bits per position of the binary autoencoder
+  latent_size: 16 # 256x256 image -> 16x16 binary latent
+  num_timesteps: ${model.num_timesteps}
+  embed_dim: 768
+  num_heads: 12
+  num_layers: 24
+  embed_dropout: 0.0
+  dropout: 0.0
+  drop_path: 0.0
+  condition: none # none, class, text, text_cross

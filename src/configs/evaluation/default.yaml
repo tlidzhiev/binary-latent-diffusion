@@ -1,0 +1,11 @@
+# Evaluation generates images and compares them to the real ones (FID)
+num_samples: 5000 # generated images per evaluation
+batch_size: 50
+temperature: 1.0
+num_steps: null # number of reverse steps, null for all model.num_timesteps steps
+guidance: null # classifier-free guidance scale, needs model.cond_dropout > 0 at training
+# statistics of the real images are cached once as {stats_dir}/{partition}_{metric}.pth,
+# they depend on the dataset, so use a separate directory for each dataset
+stats_dir: assets/fid_stats
+num_logged_images: 16 # generated images logged to the writer after evaluation
+nrow: 4

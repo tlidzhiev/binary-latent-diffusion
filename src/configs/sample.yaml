@@ -1,0 +1,21 @@
+hydra:
+  run:
+    dir: data/saved/${sampler.save_path}
+
+defaults:
+  - _self_
+  - autoencoder: c64
+  - model: diffusion
+
+sampler:
+  device: "auto" # device name or "auto"
+  seed: 42
+  from_pretrained: null # path to the diffusion model checkpoint (*.pth file)
+  use_ema: true # load EMA (shadow) weights from checkpoint instead of raw weights
+  save_path: "samples" # images are saved to data/saved/{save_path}/
+  num_samples: 64
+  batch_size: 16
+  temperature: 1.0
+  num_steps: null # number of reverse steps, null for all model.num_timesteps steps
+  guidance: null # classifier-free guidance scale, needs model.cond_dropout > 0 at training
+  label: null # class label for class-conditional models

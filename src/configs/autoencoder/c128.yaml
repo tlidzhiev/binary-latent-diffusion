@@ -1,0 +1,5 @@
+# C128: 256x256x3 -> 16x16x128
+_target_: src.model.bae.bae.BinaryAutoEncoder.from_pretrained
+checkpoint_path: assets/binaryae_ema_10200000.th
+codebook_size: 128
+decoder_mult: 3

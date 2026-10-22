@@ -1,0 +1,38 @@
+hydra:
+  run:
+    dir: ${writer.log_dir}
+
+defaults:
+  - _self_
+  - dataset: ???
+  - dataloader: default
+  - autoencoder: c64
+  - evaluation: default
+  - transforms: diffusion
+  - model: diffusion
+  - criterion: diffusion
+  - metrics: diffusion
+  - optimizer: diffusion
+  - lr_scheduler: cosine
+  - writer: cometml
+
+trainer:
+  log_step: 100
+  num_epochs: 10
+  epoch_len: null # null for epoch-based training, int for iteration-based
+  device_tensors: ["img"] # add "label" for conditional models
+  resume_from: null # null or checkpoint file name inside checkpoint_dir (*.pth)
+  from_pretrained: null # null or path to the model checkpoint (*.pth file)
+  device: "auto" # device name or "auto"
+  monitor: "off" # "off" or "max/min metric_name"
+  save_period: 1 # checkpoint each save_period epochs (and the last) in addition to the best
+  only_best: false # true to save only model-best.pth (requires monitor)
+  early_stop: null # epochs without improvement before stopping
+  override: false # overwrite an existing run dir with the same writer.run_name
+  skip_oom: true
+  max_grad_norm: null
+  checkpoint_dir: ${writer.log_dir}/checkpoints
+  seed: 42
+  ema:
+    decay: 0.9995 # 0.995 every 10 steps in the original
+    warmup_steps: 0 # steps with linearly increasing decay (0 = disabled)

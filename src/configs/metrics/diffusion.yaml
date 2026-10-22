@@ -1,0 +1,8 @@
+train:
+  - _target_: src.metrics.bit_accuracy.BitAccuracy
+    name: BitAccuracy
+    p_flip: ${model.p_flip}
+inference:
+  - _target_: src.metrics.fid.FID
+    name: FID
+    device: auto
